@@ -1,5 +1,7 @@
 package model;
 
+import java.util.InputMismatchException;
+
 public class GenericByte {
 
 	protected Integer a;
@@ -9,6 +11,8 @@ public class GenericByte {
 
 	public GenericByte(String abcd) {
 		String[] valores = abcd.split("\\.");
+		if(valores.length != 4)
+			throw new InputMismatchException("São 4 valores de endereço: a, b, c e d.");
 		this.a = validaNum(valores[0]);
 		this.b = validaNum(valores[1]);
 		this.c = validaNum(valores[2]);
@@ -18,7 +22,7 @@ public class GenericByte {
 	private Integer validaNum(String num) {
 		Integer valueOf = Integer.valueOf(num);
 		if (valueOf > 255 || valueOf < 0) {
-			throw new IllegalArgumentException("Cada casa deve estar entre 0 e 255");
+			throw new IllegalArgumentException("Cada casa deve estar entre 0 e 255.");
 		}
 		return valueOf;
 	}
