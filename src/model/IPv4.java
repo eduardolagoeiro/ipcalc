@@ -2,8 +2,11 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 public class IPv4 extends GenericByte {
@@ -91,7 +94,7 @@ public class IPv4 extends GenericByte {
 
 	public void print() {
 		System.out.println("O endereço de sub-rede (em notação decimal e em binário).");
-		System.out.println(formatSpaces(super.toString()) + " " + this.toBinaryFormated());
+		System.out.println(formatSpaces(this.endDaRede.toString()) + " " + this.toBinaryFormated());
 		System.out.println("\nO endereço de broadcast (em notação decimal e em binário).");
 		System.out.println(formatSpaces(this.endBroadCast.toString()) + " " + this.endBroadCast.toBinaryFormated());
 		System.out.println("\nA máscara de sub-rede (em notação decimal e em binário).");
@@ -107,8 +110,38 @@ public class IPv4 extends GenericByte {
 		System.out.println("\nO número total de endereços atribuíveis a interfaces naquela sub-rede.");
 		System.out.println(maxSubNets+"\n\n");
 	}
+	
+	public void generateAndPrintSubNet(List<Integer> valores){
+		valores = parseListaPotenciasOrdenadas(valores);
+		Long l = this.endDaRede.toLong();
+		List<IPv4> generatedSubNets = new ArrayList<>();
+		for (Integer integer : valores) {
+			int expoente = expoenteDaMenorPotenciaMaiorOuIgual(integer);
+			generatedSubNets.add(new IPv4(binToDecFormated(Long.toBinaryString(l)), 32 - expoente));
+			l += integer;
+		}
+		printSubNet(valores.size(), generatedSubNets);
+	}
 
-	public void printSubNet(int tamanhoDoPrefixoDasSubRedes) {
+	public List<Integer> parseListaPotenciasOrdenadas(List<Integer> valores){
+		List<Integer> list = new ArrayList<>();
+		
+		for (Integer integer : valores) {
+			list.add(menorPotenciaMaiorOuIgual(integer+2));
+		}
+		
+		Collections.sort(list, new Comparator<Integer>(){
+			@Override
+			public int compare(Integer arg0, Integer arg1) {
+				return arg1-arg0;
+			}
+			
+		});
+		
+		return list;
+	}
+
+	public void generateAndPrintSubNet(int tamanhoDoPrefixoDasSubRedes) {
 		if(x == tamanhoDoPrefixoDasSubRedes){
 			System.out.println("1 sub-rede (a própria rede):\n");
 			System.out.println("Sub-rede #1:");
@@ -121,10 +154,21 @@ public class IPv4 extends GenericByte {
 		if(tamanhoDoPrefixoDasSubRedes > 30 || tamanhoDoPrefixoDasSubRedes < 0)
 			throw new IllegalArgumentException("Tamanho de prefixo de sub-rede deve ser entre 0 e 30");
 		int dif = (int) Math.pow(2, tamanhoDoPrefixoDasSubRedes-x);
-		generateAndPrintSubNet(menorPotenciaMaiorOuIgual(dif));
+		List<IPv4> generateSubNet = generateSubNet(menorPotenciaMaiorOuIgual(dif));
+		printSubNet(dif, generateSubNet);
 	}
 
-	protected void generateAndPrintSubNet(int num) {
+	protected void printSubNet(int dif, List<IPv4> generateSubNet) {
+		int n = 1;
+		System.out.println(dif + " sub-redes:\n");
+		for (IPv4 iPv4 : generateSubNet) {
+			System.out.println("Sub-rede #"+n+":");
+			iPv4.print();
+			n++;
+		}
+	}
+
+	protected List<IPv4> generateSubNet(int num) {
 		String prefixo = endDaRede.toBinary().substring(0, x);
 		String sufixo = endDaRede.toBinary().substring(x);
 		
@@ -132,17 +176,17 @@ public class IPv4 extends GenericByte {
 		mapa.put(sufixo, 0);
 		function(mapa, num);
 		
-		ArrayList<String> list = new ArrayList<>(mapa.keySet());
+		List<IPv4> listIps = new ArrayList<>();
+		List<String> list = new ArrayList<>(mapa.keySet());
 		Collections.sort(list);
-		System.out.println(num + " sub-redes:\n");
-		int n = 1;
+		
 		for (String	sufixoSubNet : list) {
-			System.out.println("Sub-rede #"+n+":");
 			String ip = prefixo+sufixoSubNet;
 			String ipDecFormated = binToDecFormated(ip);
-			new IPv4(ipDecFormated, x+mapa.get(sufixoSubNet)).print();
-			n++;
+			IPv4 iPv4 = new IPv4(ipDecFormated, x+mapa.get(sufixoSubNet));
+			listIps.add(iPv4);
 		}
+		return listIps;
 	}
 	
 	public HashMap<String, Integer> function(HashMap<String, Integer> mapa, int n){
@@ -166,7 +210,11 @@ public class IPv4 extends GenericByte {
 	}
 	
 	private int menorPotenciaMaiorOuIgual(int i){
-		return (int) Math.pow(2, Math.ceil(Math.log(i)/Math.log(2)));
+		return (int) Math.pow(2, expoenteDaMenorPotenciaMaiorOuIgual(i));
+	}
+
+	protected int expoenteDaMenorPotenciaMaiorOuIgual(int i) {
+		return (int) Math.ceil(Math.log(i)/Math.log(2));
 	}
 
 }
