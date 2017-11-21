@@ -3,7 +3,7 @@ package model;
 import java.util.InputMismatchException;
 
 /**
- * Classe que guarda 4 bytes para representar endereços no formato a.b.c.d
+ * Classe que guarda 4 bytes para representar endereÃ§os no formato a.b.c.d
  */
 public class GenericByte {
 
@@ -28,12 +28,12 @@ public class GenericByte {
 	 * Construtor da classe GenericByte
 	 * 
 	 * @param abcd
-	 *            ip válido no formato a.b.c.d
+	 *            ip vÃ¡lido no formato a.b.c.d
 	 */
 	public GenericByte(String abcd) {
 		String[] valores = abcd.split("\\.");
 		if (valores.length != 4)
-			throw new InputMismatchException("São 4 valores de endereço: a, b, c e d.");
+			throw new InputMismatchException("SÃ£o 4 valores de endereÃ§o: a, b, c e d.");
 		this.a = validaNum(valores[0]);
 		this.b = validaNum(valores[1]);
 		this.c = validaNum(valores[2]);
@@ -44,7 +44,7 @@ public class GenericByte {
 	 * Valida entrada
 	 * @param num
 	 *            byte em decimal na forma de string
-	 * @return número inteiro decimal válido para um dos bytes.
+	 * @return nÃºmero inteiro decimal vÃ¡lido para um dos bytes.
 	 */
 	private Integer validaNum(String num) {
 		Integer valueOf = Integer.valueOf(num);
@@ -55,7 +55,7 @@ public class GenericByte {
 	}
 
 	/**
-	 * Representação em string da classe
+	 * RepresentaÃ§Ã£o em string da classe
 	 * @return String que representa os 4 bytes no formato a.b.c.d
 	 */
 	@Override
@@ -64,8 +64,8 @@ public class GenericByte {
 	}
 
 	/**
-	 * Converte objeto em único valor decimal
-	 * @return os 4 bytes como um único valor decimal
+	 * Converte objeto em Ãºnico valor decimal
+	 * @return os 4 bytes como um Ãºnico valor decimal
 	 */
 	public Long toLong() {
 		String s = this.toBinary();
@@ -74,8 +74,8 @@ public class GenericByte {
 	}
 
 	/**
-	 * Converte objeto em único valor binário
-	 * @return os 4 bytes como um único valor binário
+	 * Converte objeto em Ãºnico valor binÃ¡rio
+	 * @return os 4 bytes como um Ãºnico valor binÃ¡rio
 	 */
 	public String toBinary() {
 		String stringa = decToBin8Bits(a);
@@ -87,8 +87,8 @@ public class GenericByte {
 	}
 
 	/**
-	 * Converte objeto em único valor binário formatado
-	 * @return os 4 bytes como um único valor binário formatado a.b.c.d
+	 * Converte objeto em Ãºnico valor binÃ¡rio formatado
+	 * @return os 4 bytes como um Ãºnico valor binÃ¡rio formatado a.b.c.d
 	 */
 	public String toBinaryFormated() {
 		String stringa = decToBin8Bits(a);
@@ -100,10 +100,10 @@ public class GenericByte {
 	}
 
 	/**
-	 * Converte número decimal em binário de 8 bits
+	 * Converte nÃºmero decimal em binÃ¡rio de 8 bits
 	 * @param n
-	 *            número decimal que representa um binário 8 bits
-	 * @return string binária de 8 bits
+	 *            nÃºmero decimal que representa um binÃ¡rio 8 bits
+	 * @return string binÃ¡ria de 8 bits
 	 */
 	public static String decToBin8Bits(Integer n) {
 		if (n > 255 || n < 0)
@@ -117,10 +117,10 @@ public class GenericByte {
 	}
 
 	/**
-	 * Converte número binário em binário de 32 bits
+	 * Converte nÃºmero binÃ¡rio em binÃ¡rio de 32 bits
 	 * @param n
-	 *            string binária
-	 * @return string binária de 32 bits
+	 *            string binÃ¡ria
+	 * @return string binÃ¡ria de 32 bits
 	 */
 	public static String binTo32bits(String n) {
 		StringBuilder sb = new StringBuilder();
@@ -132,12 +132,12 @@ public class GenericByte {
 	}
 
 	/**
-	 * Converte número binário em binário formatado de 32 bits
+	 * Converte nÃºmero binÃ¡rio em binÃ¡rio formatado de 32 bits
 	 * @param abcd
-	 *            string binária menor que 32 bits
+	 *            string binÃ¡ria menor que 32 bits
 	 * @return decimal formatado a.b.c.d
 	 */
-	protected String binToDecFormated(String abcd) {
+	public String binToDecFormated(String abcd) {
 		abcd = binTo32bits(abcd);
 		Integer valueOf1 = Integer.valueOf(abcd.substring(0, 8), 2);
 		Integer valueOf2 = Integer.valueOf(abcd.substring(8, 16), 2);
