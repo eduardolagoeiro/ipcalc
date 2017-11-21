@@ -5,6 +5,7 @@ Implementação do programa ipcalc segundo as instruções da disciplina de rede
 https://sites.googlecom/site/diegogpassos/disciplinas/redesisi_2017_2/especificacao-do-segundo-trabalho
 
 Instruções de compilação e uso.
+
   Trabalho feito em Java (JDK1.8.0_121) utilizando IDE eclipse
   Extrair zip e importar projeto em uma IDE e executar classe Main.java
   ou
@@ -12,9 +13,11 @@ Instruções de compilação e uso.
   java -jar trabalho2redes.jar
   
 Uma descrição geral dos módulos que compõem a implementação (e.g., classes, arquivos fonte).
+
   javadoc em doc/index.html
 
 Grupo:
+
   Caio Lima
   Eduardo Lagoeiro
   Gabriel Guedine
