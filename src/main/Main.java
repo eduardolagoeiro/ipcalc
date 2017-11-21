@@ -12,9 +12,9 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		System.out.println("Modo de Informações(1)");
-		System.out.println("Modo de Divisão em Sub-redes de Tamanho Fixo(2)");
-		System.out.println("Modo de Divisão em Sub-redes de Tamanho Variável(3)");
+		System.out.println("Modo de InformaÃ§Ãµes(1)");
+		System.out.println("Modo de DivisÃ£o em Sub-redes de Tamanho Fixo(2)");
+		System.out.println("Modo de DivisÃ£o em Sub-redes de Tamanho VariÃ¡vel(3)");
 
 		int menu = readPositiveInt("\nEntre com 1/2/3\n->", 1, 3);
 
@@ -57,18 +57,19 @@ public class Main {
 			Integer maxSubNets = ipv4.getMaxSubNets();
 			int numDeSubRedes = 1;
 			do {
-				System.out.println("\nVocê possui "+maxSubNets+" endereços atribuíveis a interfaces.");
-				String message = "\nInsira o número de endereços atribuíveis a interfaces para a sub-rede num#"
-						+ numDeSubRedes + " (Para sair do menu de inserção entre 0)\n->";
+				System.out.println("\nVocÃª possui "+maxSubNets+" endereÃ§os atribuÃ­veis a interfaces.");
+				String message = "\nInsira o nÃºmero de endereÃ§os atribuÃ­veis a interfaces para a sub-rede num#"
+						+ numDeSubRedes + " (Para sair do menu de inserÃ§Ã£o entre 0)\n->";
 				String complemento = "Lembrando que sua rede tem um total de " + maxSubNets
-						+ " interfaces atribuíveis disponíveis.";
+						+ " interfaces atribuÃ­veis disponÃ­veis.";
 				inteiro = readPositiveInt(message, 0, maxSubNets, complemento);
+				int menorPotenciaMaiorOuIgual = IPv4.menorPotenciaMaiorOuIgual(inteiro+2);
 				if (inteiro != 0) {
-					inteiros.add(inteiro);
-					maxSubNets -= inteiro;
+					inteiros.add(menorPotenciaMaiorOuIgual);
+					maxSubNets -= menorPotenciaMaiorOuIgual;
 					numDeSubRedes++;
 				}
-				if(maxSubNets == 0)
+				if(maxSubNets <= 0)
 					break;
 			} while (inteiro != 0);
 			
@@ -91,7 +92,7 @@ public class Main {
 			try {
 				menu = scan.nextInt();
 			} catch (java.util.InputMismatchException e) {
-				System.out.println("Entre números positivos.");
+				System.out.println("Entre nÃºmeros positivos.");
 				scan.nextLine();
 			}
 			if (menu < min || menu > max) {
@@ -107,13 +108,13 @@ public class Main {
 	private static IPv4 validaEntrada(String abcdx) {
 		String[] s = abcdx.split("/");
 		if (s.length != 2)
-			throw new InputMismatchException("Você deve entrar com ip no formato a.b.c.d/x.");
+			throw new InputMismatchException("VocÃª deve entrar com ip no formato a.b.c.d/x.");
 		String abcd = s[0];
 		Integer valueOf = null;
 		try {
 			valueOf = Integer.valueOf(s[1]);
 		} catch (NumberFormatException e) {
-			throw new NumberFormatException("Os valores de a, b, c, d e x são numericos.");
+			throw new NumberFormatException("Os valores de a, b, c, d e x sÃ£o numericos.");
 		}
 		return new IPv4(abcd, valueOf);
 	}
