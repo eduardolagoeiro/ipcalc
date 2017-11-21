@@ -206,7 +206,7 @@ public class IPv4 extends GenericByte {
 		if (valores.isEmpty())
 			return;
 		else {
-			if (valores.size() == 1 && valores.get(0).equals(maxSubNets)) {
+			if (valores.size() == 1 && valores.get(0).equals(maxSubNets+2)) {
 				generateAndPrintSubNet(x);
 				return;
 			}
@@ -236,7 +236,7 @@ public class IPv4 extends GenericByte {
 		List<Integer> list = new ArrayList<>();
 
 		for (Integer integer : valores) {
-			list.add(menorPotenciaMaiorOuIgual(integer + 2));
+			list.add(menorPotenciaMaiorOuIgual(integer));
 		}
 
 		Collections.sort(list, new Comparator<Integer>() {
