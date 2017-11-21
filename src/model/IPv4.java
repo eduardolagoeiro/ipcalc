@@ -10,7 +10,7 @@ import java.util.Set;
 
 /**
  * Classe que guarda 4 bytes e tamanho de prefixo da sub-rede para representar
- * endereÁos no formato a.b.c.d/x
+ * endere√ßos no formato a.b.c.d/x
  */
 public class IPv4 extends GenericByte {
 
@@ -19,33 +19,33 @@ public class IPv4 extends GenericByte {
 	 */
 	private int x;
 	/**
-	 * M·scara de sub-rede
+	 * M√°scara de sub-rede
 	 */
 	private GenericByte mascaraSubRede;
 	/**
-	 * EndereÁo da rede
+	 * Endere√ßo da rede
 	 */
 	private GenericByte endDaRede;
 	/**
-	 * EndereÁo de broadcast
+	 * Endere√ßo de broadcast
 	 */
 	private GenericByte endBroadCast;
 	/**
-	 * Menor endereÁo atribuÌvel
+	 * Menor endere√ßo atribu√≠vel
 	 */
 	private GenericByte firstEnd;
 
 	/**
-	 * Maior endereÁo atribuÌvel
+	 * Maior endere√ßo atribu√≠vel
 	 */
 	private GenericByte lastEnd;
 	/**
-	 * N˙mero m·ximo de endereÁos atribuÌveis
+	 * N√∫mero m√°ximo de endere√ßos atribu√≠veis
 	 */
 	private Integer maxSubNets;
 
 	/**
-	 * @return O n˙mero total de endereÁos atribuÌveis a interfaces nessa
+	 * @return O n√∫mero total de endere√ßos atribu√≠veis a interfaces nessa
 	 *         sub-rede.
 	 */
 	public Integer getMaxSubNets() {
@@ -56,7 +56,7 @@ public class IPv4 extends GenericByte {
 	 * Construtor da classe ipv4
 	 * 
 	 * @param abcd
-	 *            ip v·lido no formato a.b.c.d
+	 *            ip v√°lido no formato a.b.c.d
 	 * @param x
 	 *            tamanho do prefixo da sub-rede.
 	 */
@@ -74,8 +74,8 @@ public class IPv4 extends GenericByte {
 	}
 
 	/**
-	 * Gera ˙ltimo endereÁo possÌvel nessa sub-rede diminuindo 1 do valor do
-	 * endereÁo de broadcast
+	 * Gera √∫ltimo endere√ßo poss√≠vel nessa sub-rede diminuindo 1 do valor do
+	 * endere√ßo de broadcast
 	 */
 	private void gerarLastEnd() {
 		Long endDec = this.endBroadCast.toLong() - 1;
@@ -85,8 +85,8 @@ public class IPv4 extends GenericByte {
 	}
 
 	/**
-	 * Gera primeiro endereÁo possÌvel nessa sub-rede somando 1 do valor do
-	 * endereÁo de sub-rede
+	 * Gera primeiro endere√ßo poss√≠vel nessa sub-rede somando 1 do valor do
+	 * endere√ßo de sub-rede
 	 */
 	private void gerarFirstEnd() {
 		Long endDec = this.endDaRede.toLong() + 1;
@@ -96,21 +96,21 @@ public class IPv4 extends GenericByte {
 	}
 
 	/**
-	 * Gera endereÁo de broadcast trocando os bits de sufixo para 1
+	 * Gera endere√ßo de broadcast trocando os bits de sufixo para 1
 	 */
 	private void gerarEndBroadCast() {
 		this.endBroadCast = trocarXBitsADireta(super.toString(), "1");
 	}
 
 	/**
-	 * Gera endereÁo de sub-rede trocando os bits de sufixo para 0
+	 * Gera endere√ßo de sub-rede trocando os bits de sufixo para 0
 	 */
 	private void gerarEndDaRede() {
 		this.endDaRede = trocarXBitsADireta(super.toString(), "0");
 	}
 
 	/**
-	 * Gera m·scara de sub-rede trocando os bits de sufixo para 0 de um ip
+	 * Gera m√°scara de sub-rede trocando os bits de sufixo para 0 de um ip
 	 * 255.255.255.255
 	 */
 	private void gerarMascSubRede() {
@@ -143,7 +143,7 @@ public class IPv4 extends GenericByte {
 	}
 
 	/**
-	 * RepresentaÁ„o em string da classe
+	 * Representa√ß√£o em string da classe
 	 * 
 	 * @return String que representa os 4 bytes e o tamanho do prefixo no
 	 *         formato a.b.c.d/x
@@ -167,37 +167,37 @@ public class IPv4 extends GenericByte {
 	}
 
 	/**
-	 * FunÁ„o para imprimir informaÁıes pedidas no trabalho , o endereÁo de
-	 * sub-rede (em notaÁ„o decimal e em bin·rio) , o endereÁo de broadcast (em
-	 * notaÁ„o decimal e em bin·rio) , a m·scara de sub-rede (em notaÁ„o decimal
-	 * e em bin·rio) , o tamanho do prefixo da sub-rede. , o primeiro (i.e.,
-	 * menor) endereÁo atribuÌvel a uma interface (em notaÁ„o decimal e em
-	 * bin·rio) , o ˙ltimo (i.e., maior) endereÁo atribuÌvel a uma interface (em
-	 * notaÁ„o decimal e em bin·rio) e o n˙mero total de endereÁos atribuÌveis a
+	 * Fun√ß√£o para imprimir informa√ß√µes pedidas no trabalho , o endere√ßo de
+	 * sub-rede (em nota√ß√£o decimal e em bin√°rio) , o endere√ßo de broadcast (em
+	 * nota√ß√£o decimal e em bin√°rio) , a m√°scara de sub-rede (em nota√ß√£o decimal
+	 * e em bin√°rio) , o tamanho do prefixo da sub-rede. , o primeiro (i.e.,
+	 * menor) endere√ßo atribu√≠vel a uma interface (em nota√ß√£o decimal e em
+	 * bin√°rio) , o √∫ltimo (i.e., maior) endere√ßo atribu√≠vel a uma interface (em
+	 * nota√ß√£o decimal e em bin√°rio) e o n√∫mero total de endere√ßos atribu√≠veis a
 	 * interfaces naquela sub-rede.
 	 */
 	public void print() {
-		System.out.println("O endereÁo de sub-rede (em notaÁ„o decimal e em bin·rio).");
+		System.out.println("O endere√ßo de sub-rede (em nota√ß√£o decimal e em bin√°rio).");
 		System.out.println(formatSpaces(this.endDaRede.toString()) + " " + this.toBinaryFormated());
-		System.out.println("\nO endereÁo de broadcast (em notaÁ„o decimal e em bin·rio).");
+		System.out.println("\nO endere√ßo de broadcast (em nota√ß√£o decimal e em bin√°rio).");
 		System.out.println(formatSpaces(this.endBroadCast.toString()) + " " + this.endBroadCast.toBinaryFormated());
-		System.out.println("\nA m·scara de sub-rede (em notaÁ„o decimal e em bin·rio).");
+		System.out.println("\nA m√°scara de sub-rede (em nota√ß√£o decimal e em bin√°rio).");
 		System.out.println(formatSpaces(this.mascaraSubRede.toString()) + " " + this.mascaraSubRede.toBinaryFormated());
 		System.out.println("\nO tamanho do prefixo da sub-rede.");
 		System.out.println(this.x);
 		System.out.println(
-				"\nO primeiro (i.e., menor) endereÁo atribuÌvel a uma interface (em notaÁ„o decimal e em bin·rio).");
+				"\nO primeiro (i.e., menor) endere√ßo atribu√≠vel a uma interface (em nota√ß√£o decimal e em bin√°rio).");
 		System.out.println(formatSpaces(this.firstEnd.toString()) + " " + this.firstEnd.toBinaryFormated());
 		System.out.println(
-				"\nO ˙ltimo (i.e., maior) endereÁo atribuÌvel a uma interface (em notaÁ„o decimal e em bin·rio).");
+				"\nO √∫ltimo (i.e., maior) endere√ßo atribu√≠vel a uma interface (em nota√ß√£o decimal e em bin√°rio).");
 		System.out.println(formatSpaces(this.lastEnd.toString()) + " " + this.lastEnd.toBinaryFormated());
-		System.out.println("\nO n˙mero total de endereÁos atribuÌveis a interfaces naquela sub-rede.");
+		System.out.println("\nO n√∫mero total de endere√ßos atribu√≠veis a interfaces naquela sub-rede.");
 		System.out.println(maxSubNets + "\n");
 	}
 
 	/**
-	 * Gera e imprime as informaÁıes das sub-redes de acordo com a lista de
-	 * entrada do Modo de Divis„o em Sub-redes de Tamanho Vari·vel
+	 * Gera e imprime as informa√ß√µes das sub-redes de acordo com a lista de
+	 * entrada do Modo de Divis√£o em Sub-redes de Tamanho Vari√°vel
 	 * 
 	 * @param valores
 	 *            lista com os valores requeridos para as sub-redes
@@ -223,14 +223,14 @@ public class IPv4 extends GenericByte {
 	}
 
 	/**
-	 * Lista em ordem descrescentes com as menores potÍncias de dois que s„o
-	 * maior ou igual aos valores passados na entrada no Modo de Divis„o em
-	 * Sub-redes de Tamanho Vari·vel
+	 * Lista em ordem descrescentes com as menores pot√™ncias de dois que s√£o
+	 * maior ou igual aos valores passados na entrada no Modo de Divis√£o em
+	 * Sub-redes de Tamanho Vari√°vel
 	 * 
 	 * @param valores
 	 *            lista com os valores de entrada
-	 * @return lista em ordem descrescente com as menores potÍncias de dois que
-	 *         s„o maior ou igual aos valores da lista inicial
+	 * @return lista em ordem descrescente com as menores pot√™ncias de dois que
+	 *         s√£o maior ou igual aos valores da lista inicial
 	 */
 	public List<Integer> parseListaPotenciasOrdenadas(List<Integer> valores) {
 		List<Integer> list = new ArrayList<>();
@@ -251,29 +251,29 @@ public class IPv4 extends GenericByte {
 	}
 
 	/**
-	 * Gera e imprime as informaÁıes das sub-redes de acordo com o tamanho de
+	 * Gera e imprime as informa√ß√µes das sub-redes de acordo com o tamanho de
 	 * prefixo passado
 	 * 
 	 * @param tam
 	 *            Tamanho do prefixo das sub-redes
-	 * @return verdadeiro caso funÁ„o tenha executado e falso para exceÁıes
-	 *         lanÁadas
+	 * @return verdadeiro caso fun√ß√£o tenha executado e falso para exce√ß√µes
+	 *         lan√ßadas
 	 * @exception IllegalArgumentException
-	 *                quando o tamanho do prefixo das sub-redes È menor que o da
+	 *                quando o tamanho do prefixo das sub-redes √© menor que o da
 	 *                rede a ser dividida
 	 * @exception IllegalArgumentException
-	 *                quando o tamanho È inv·lido (menor que 0 ou maior que 30)
+	 *                quando o tamanho √© inv√°lido (menor que 0 ou maior que 30)
 	 */
 	public boolean generateAndPrintSubNet(int tam) {
 		if (x == tam) {
-			System.out.println("1 sub-rede (a prÛpria rede):\n");
+			System.out.println("1 sub-rede (a pr√≥pria rede):\n");
 			System.out.println("Sub-rede #1:");
 			this.print();
 			return true;
 		}
 		if (x > tam) {
 			throw new IllegalArgumentException("Sua sub-rede tem prefixo " + this.x
-					+ ", vocÍ n„o pode dividÌ-la em subredes de prefixo com tamanho " + tam + ".");
+					+ ", voc√™ n√£o pode divid√≠-la em subredes de prefixo com tamanho " + tam + ".");
 		}
 		if (tam > 30 || tam < 0)
 			throw new IllegalArgumentException("Tamanho de prefixo de sub-rede deve ser entre 0 e 30");
@@ -284,7 +284,7 @@ public class IPv4 extends GenericByte {
 	}
 
 	/**
-	 * Imprime sub-redes na mesma formataÁ„o do print()
+	 * Imprime sub-redes na mesma formata√ß√£o do print()
 	 * 
 	 * @param generatedSubNet
 	 *            lista de sub-redes geradas
@@ -304,12 +304,12 @@ public class IPv4 extends GenericByte {
 	}
 
 	/**
-	 * Gera um n˙mero de subredes com o melhor aproveitamento possÌvel, sempre
-	 * subdividindo nas sub-redes que podem atribuir o maior n˙mero possÌvel
-	 * endereÁos
+	 * Gera um n√∫mero de subredes com o melhor aproveitamento poss√≠vel, sempre
+	 * subdividindo nas sub-redes que podem atribuir o maior n√∫mero poss√≠vel
+	 * endere√ßos
 	 * 
 	 * @param num
-	 *            n˙mero de sub-redes que se pretende criar
+	 *            n√∫mero de sub-redes que se pretende criar
 	 * @return lista de sub-redes geradas
 	 */
 	protected List<IPv4> generateSubNet(int num) {
@@ -334,15 +334,15 @@ public class IPv4 extends GenericByte {
 	}
 
 	/**
-	 * FunÁ„o que gera novos sufixos a partir do sufixo antigo(K) e um valor
-	 * associado(V) que indica a posiÁ„o do sufixo que podemos dividir em duas,
-	 * a funÁ„o È recursiva e para quando temos valores no mapa que sejam
-	 * suficientes de acordo com o par‚metro n
+	 * Fun√ß√£o que gera novos sufixos a partir do sufixo antigo(K) e um valor
+	 * associado(V) que indica a posi√ß√£o do sufixo que podemos dividir em duas,
+	 * a fun√ß√£o √© recursiva e para quando temos valores no mapa que sejam
+	 * suficientes de acordo com o par√¢metro n
 	 * 
 	 * @param mapa
-	 *            Mapa Key,Value: K = sufixo, V = posiÁ„o que podemos alterar;
+	 *            Mapa Key,Value: K = sufixo, V = posi√ß√£o que podemos alterar;
 	 * @param n
-	 *            n˙mero de sub-redes que queremos
+	 *            n√∫mero de sub-redes que queremos
 	 */
 	public void function(HashMap<String, Integer> mapa, int n) {
 		if (mapa.size() < n) {
@@ -363,11 +363,11 @@ public class IPv4 extends GenericByte {
 		}
 	}
 
-	private int menorPotenciaMaiorOuIgual(int i) {
+	public static int menorPotenciaMaiorOuIgual(int i) {
 		return (int) Math.pow(2, expoenteDaMenorPotenciaMaiorOuIgual(i));
 	}
 
-	protected int expoenteDaMenorPotenciaMaiorOuIgual(int i) {
+	public static int expoenteDaMenorPotenciaMaiorOuIgual(int i) {
 		return (int) Math.ceil(Math.log(i) / Math.log(2));
 	}
 
