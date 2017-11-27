@@ -5,6 +5,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import model.GenericByte;
 import model.IPv4;
 
 public class Main {
@@ -56,13 +57,23 @@ public class Main {
 			int inteiro = -1;
 			Integer maxSubNets = ipv4.getMaxSubNets();
 			int numDeSubRedes = 1;
+			boolean first = true;
 			do {
-				System.out.println("\nVocê possui "+maxSubNets+" endereços atribuíveis a interfaces.");
+				int limiteSuperior;
+				if(first){
+					limiteSuperior = maxSubNets;
+					first = false;
+				}else
+					limiteSuperior = IPv4.menorPotenciaMaiorOuIgual(maxSubNets)/2 - 2;
+				if(limiteSuperior <= 0) break;
+				System.out.println("\nVocê possui "+maxSubNets+" endereços atribuíveis a interfaces e o maior endereço possível é "
+						   + limiteSuperior + ".");
 				String message = "\nInsira o número de endereços atribuíveis a interfaces para a sub-rede num#"
 						+ numDeSubRedes + " (Para sair do menu de inserção entre 0)\n->";
 				String complemento = "Lembrando que sua rede tem um total de " + maxSubNets
-						+ " interfaces atribuíveis disponíveis.";
-				inteiro = readPositiveInt(message, 0, maxSubNets, complemento);
+						+ " interfaces atribuíveis disponíveis e o maior endereço possível é " +
+					limiteSuperior + ".";
+				inteiro = readPositiveInt(message, 0, limiteSuperior, complemento);
 				int menorPotenciaMaiorOuIgual = IPv4.menorPotenciaMaiorOuIgual(inteiro+2);
 				if (inteiro != 0) {
 					inteiros.add(menorPotenciaMaiorOuIgual);
@@ -86,6 +97,7 @@ public class Main {
 	}
 
 	protected static int readPositiveInt(String string, int min, int max, String complemento) {
+		if(max < min) return 0;
 		int menu = -1;
 		do {
 			System.out.print(string);
