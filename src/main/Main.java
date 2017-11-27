@@ -114,8 +114,39 @@ public class Main {
 		try {
 			valueOf = Integer.valueOf(s[1]);
 		} catch (NumberFormatException e) {
-			throw new NumberFormatException("Os valores de a, b, c, d e x são numericos.");
+			String[] subnetMask = s[1].split("\\.");
+			if(subnetMask.length != 4 && s[1].contains("."))
+				throw new IllegalArgumentException("Máscara de sub-rede "+s[1]+" não é válida.");
+			else if(validaMask(s[1])){
+				GenericByte gb = new GenericByte(s[1]);
+				String bin = gb.toBinary();
+				String sufix = bin.substring(bin.indexOf("0"));
+				valueOf = 32 - sufix.length();
+				if (valueOf > 30 || valueOf < 0)
+					throw new IllegalArgumentException("Tamanho de prefixo de sub-rede deve ser entre 0 e 30");
+			}
+			else
+				throw new NumberFormatException("Os valores de a, b, c, d e x são numericos.");
 		}
 		return new IPv4(abcd, valueOf);
+	}
+			   
+	private static boolean validaMask(String s){
+		
+		GenericByte gb = null;
+		try{
+			gb = new GenericByte(s);
+		} catch(InputMismatchException e){
+			throw new InputMismatchException("Máscara de sub-rede "+s+" não é válida, valores não estão entre 0 e 255.");
+		}
+		String bin = gb.toBinary();
+		boolean resp = false;
+		try{
+			String sufix = bin.substring(bin.indexOf("0"));
+			resp = !sufix.contains("1");
+		}catch(StringIndexOutOfBoundsException e){
+			throw new IllegalArgumentException("Tamanho de prefixo de sub-rede deve ser entre 0 e 30");
+		}
+		return resp;
 	}
 }
