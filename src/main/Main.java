@@ -65,7 +65,8 @@ public class Main {
 					first = false;
 				}else
 					limiteSuperior = IPv4.menorPotenciaMaiorOuIgual(maxSubNets)/2 - 2;
-				if(limiteSuperior <= 0) break;
+				if(limiteSuperior <= 0)
+					limiteSuperior = maxSubNets;
 				System.out.println("\nVocê possui "+maxSubNets+" endereços atribuíveis a interfaces e o maior endereço possível é "
 						   + limiteSuperior + ".");
 				String message = "\nInsira o número de endereços atribuíveis a interfaces para a sub-rede num#"
