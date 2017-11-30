@@ -63,8 +63,13 @@ public class Main {
 				if(first){
 					limiteSuperior = maxSubNets;
 					first = false;
-				}else
-					limiteSuperior = IPv4.menorPotenciaMaiorOuIgual(maxSubNets)/2 - 2;
+				}else {
+					if(IPv4.menorPotenciaMaiorOuIgual(maxSubNets) == maxSubNets+2)
+						limiteSuperior = maxSubNets;
+					else{
+						limiteSuperior = IPv4.menorPotenciaMaiorOuIgual(maxSubNets)/2 - 2;
+					}
+				}
 				if(limiteSuperior <= 0)
 					limiteSuperior = maxSubNets;
 				System.out.println("\nVocê possui "+maxSubNets+" endereços atribuíveis a interfaces e o maior endereço possível é "
