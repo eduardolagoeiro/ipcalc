@@ -19,7 +19,9 @@ Instruções de compilação e uso.
   
 Uma descrição geral dos módulos que compõem a implementação (e.g., classes, arquivos fonte).
 
-  javadoc em doc/index.html
+  Dcumento descritivo das classes de modelo (GenericByte e IPv4) está no javadoc em doc/index.html
+  
+  Comentários nas classes de modelo e main deixam bem claro como o programa funciona.
 
 Grupo:
 
