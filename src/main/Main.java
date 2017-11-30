@@ -123,7 +123,7 @@ public class Main {
 				else
 					throw new NumberFormatException("Os valores de a, b, c, d e x são numericos.");
 			}
-		}while(entrada != -1);
+		}while(entrada == -1);
 		return entrada;
 	}
 	
