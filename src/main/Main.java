@@ -44,15 +44,23 @@ public class Main {
 		case 2:
 			boolean b2 = false;
 			do {
-				//le o tamanho do prefixo ou mascara de subrede convertida em tamanho de prefixo
-				int prefixoSubRede = readPrefixoSubRede("\nEntre com o tamanho do prefixo das subredes ou máscara de sub-rede\n->", 0, 30);
 				try {
+					//le o tamanho do prefixo ou mascara de subrede convertida em tamanho de prefixo
+					int prefixoSubRede = readPrefixoSubRede("\nEntre com o tamanho do prefixo das subredes ou máscara de sub-rede\n->", 0, 30);
 					//tenta criar as subNets de acordo com o prefixo de subRede e devolve true caso consiga
 					b2 = ipv4.generateAndPrintSubNet(prefixoSubRede);
-				} catch (IllegalArgumentException e) {
+				}catch (InputMismatchException e) {
 					//mensagem de erro e limpa buffer
 					System.out.println(e.getMessage());
 					scan.nextLine();
+				}catch (NumberFormatException e) {
+					//mensagem de erro e limpa buffer
+					System.out.println(e.getMessage());
+					scan.nextLine();
+				}catch (IllegalArgumentException e){
+					//mensagem de erro e limpa buffer
+					System.out.println(e.getMessage());
+					scan.nextLine();				
 				}
 			} while (!b2);
 
@@ -127,7 +135,7 @@ public class Main {
 			} catch (NumberFormatException e){
 				//caso em que é uma subnet
 				String[] subnetMask = stringLida.split("\\.");
-				if(subnetMask.length != 4 && stringLida.contains("."))
+				if(subnetMask.length != 4)
 					//caso em que a subNet foi escrita de forma inválida
 					throw new IllegalArgumentException("Máscara de sub-rede "+stringLida+" não é válida.");
 				else if(validaMask(stringLida)){
@@ -145,9 +153,6 @@ public class Main {
 					else
 						entrada = valor;
 				}
-				else
-					//caso em que os valores não são numéricos
-					throw new NumberFormatException("Os valores de a, b, c, d e x são numericos.");
 			}
 		}while(entrada == -1);
 		return entrada;
@@ -221,6 +226,8 @@ public class Main {
 		GenericByte gb = null;
 		try{
 			gb = new GenericByte(s);
+		} catch(NumberFormatException e){
+			throw new NumberFormatException("Os valores de a, b, c, d e x são numericos.");
 		} catch(InputMismatchException e){
 			throw new InputMismatchException("Máscara de sub-rede "+s+" não é válida, valores não estão entre 0 e 255.");
 		}
