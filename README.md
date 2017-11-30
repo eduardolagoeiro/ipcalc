@@ -6,11 +6,11 @@ https://sites.google.com/site/diegogpassos/disciplinas/redesisi_2017_2/especific
 
 Instruções de compilação e uso.
 
-  >>Trabalho feito em Java (JDK1.8.0_121) utilizando IDE eclipse
+  >Trabalho feito em Java (JDK1.8.0_121) utilizando IDE eclipse
   
   >>Extrair zip e importar projeto em uma IDE e executar classe Main.java
   
-  >ou
+  >>>ou
   
   >>Executar jar que está dentro do zip
   
