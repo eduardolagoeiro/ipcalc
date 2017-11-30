@@ -41,7 +41,7 @@ public class Main {
 		case 2:
 			boolean b2 = false;
 			do {
-				int prefixoSubRede = readPositiveInt("\nEntre com o tamanho do prefixo das subredes\n->", 0, 30);
+				int prefixoSubRede = readPrefixoSubRede("\nEntre com o tamanho do prefixo das subredes ou máscara de sub-rede\n->", 0, 30);
 				try {
 					b2 = ipv4.generateAndPrintSubNet(prefixoSubRede);
 				} catch (IllegalArgumentException e) {
@@ -98,6 +98,34 @@ public class Main {
 		}
 	}
 
+	protected static int readPrefixoSubRede(String string, int min, int max){
+		int entrada = -1;
+		int valor = 0;
+		do{
+			String string = scan.nextLine().trim();
+			try{
+				entrada = Integer.valueOf(string);
+			} catch (NumberFormatException e){
+				String[] subnetMask = string.split("\\.");
+				if(subnetMask.length != 4 && string.contains("."))
+					throw new IllegalArgumentException("Máscara de sub-rede "+string+" não é válida.");
+				else if(validaMask(string)){
+					GenericByte gb = new GenericByte(string);
+					String bin = gb.toBinary();
+					String sufix = bin.substring(bin.indexOf("0"));
+					valor = 32 - sufix.length();
+					if (valor > 30 || valor < 0)
+						throw new IllegalArgumentException("Tamanho de prefixo de sub-rede deve ser entre 0 e 30");
+					else
+						entrada = valor;
+				}
+				else
+					throw new NumberFormatException("Os valores de a, b, c, d e x são numericos.");
+			}
+		}while(entrada != -1);
+		return entrada;
+	}
+	
 	protected static int readPositiveInt(String string, int min, int max) {
 		return readPositiveInt(string, min, max, "");
 	}
