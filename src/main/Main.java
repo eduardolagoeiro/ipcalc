@@ -120,7 +120,7 @@ public class Main {
 		do{
 			System.out.println(string);
 			//lê string
-			String stringLida = scan.nextLine().trim();
+			String stringLida = scan.next().trim();
 			try{
 				//tenta parsear o valor entrado como um tamanho de prefixo
 				entrada = Integer.valueOf(stringLida);
