@@ -78,7 +78,10 @@ public class IPv4 extends GenericByte {
 	 * endereço de broadcast
 	 */
 	private void gerarLastEnd() {
+		//primeiro endereço é o de broadcast - 1
 		Long endDec = this.endBroadCast.toLong() - 1;
+		//parseia para decimal formatado a.b.c.d
+		//seta objeto GenericByte com o endereço correto
 		String bin = Long.toBinaryString(endDec);
 		String stringBin = binToDecFormated(bin);
 		this.lastEnd = new GenericByte(stringBin);
@@ -89,7 +92,10 @@ public class IPv4 extends GenericByte {
 	 * endereço de sub-rede
 	 */
 	private void gerarFirstEnd() {
+		//primeiro endereço é o de rede + 1
 		Long endDec = this.endDaRede.toLong() + 1;
+		//parseia para decimal formatado a.b.c.d
+		//seta objeto GenericByte com o endereço correto
 		String bin = Long.toBinaryString(endDec);
 		String stringBin = binToDecFormated(bin);
 		this.firstEnd = new GenericByte(stringBin);
@@ -99,6 +105,7 @@ public class IPv4 extends GenericByte {
 	 * Gera endereço de broadcast trocando os bits de sufixo para 1
 	 */
 	private void gerarEndBroadCast() {
+		//endereço de broadcast é o de rede com os bits de sufixo setados para 1
 		this.endBroadCast = trocarXBitsADireta(super.toString(), "1");
 	}
 
@@ -106,6 +113,7 @@ public class IPv4 extends GenericByte {
 	 * Gera endereço de sub-rede trocando os bits de sufixo para 0
 	 */
 	private void gerarEndDaRede() {
+		//endereço de broadcast é o de rede com os bits de sufixo setados para 0
 		this.endDaRede = trocarXBitsADireta(super.toString(), "0");
 	}
 
@@ -129,14 +137,16 @@ public class IPv4 extends GenericByte {
 	private GenericByte trocarXBitsADireta(String ipformatado, String bin) {
 		GenericByte gb = new GenericByte(ipformatado);
 		StringBuilder sb = new StringBuilder();
+		//coloca os bits que você nao quer trocar a esquerda
 		sb.append(gb.toBinary().substring(0, x));
+		//vai colocar o que foi passado no bin a direita até dar 32 bits
 		for (int i = 0; i < 32 - x; i++) {
 			sb.append(bin);
 		}
-
+		//parseia para decimal formatado a.b.c.d
+		//devolve objeto GenericByte com as mudanças
 		String abcd = sb.toString();
 		String s = binToDecFormated(abcd);
-
 		gb = new GenericByte(s);
 		return gb;
 
@@ -154,6 +164,7 @@ public class IPv4 extends GenericByte {
 	}
 
 	private String spaces(int n) {
+		//colocar numero diferentes de espaços de acordo com n
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < 20 - n; i++) {
 			sb.append(" ");
@@ -163,6 +174,7 @@ public class IPv4 extends GenericByte {
 	}
 
 	private String formatSpaces(String string) {
+		//colocar numero diferentes de espaços de acordo com o tamanho da string
 		return string + spaces(string.length());
 	}
 
@@ -206,17 +218,38 @@ public class IPv4 extends GenericByte {
 		if (valores.isEmpty())
 			return;
 		else {
+			//caso em que é requerido só um endereço e esse endereço é o maxSubNets+2 é a própria subrede
 			if (valores.size() == 1 && valores.get(0).equals(maxSubNets+2)) {
 				generateAndPrintSubNet(x);
 				return;
 			}
 		}
+		//organiza a lista de forma decrescente e potencia de dois
 		valores = parseListaPotenciasOrdenadas(valores);
+		//instancia l como o num binário que começa do endereço endereço da rede
 		Long l = this.endDaRede.toLong();
 		List<IPv4> generatedSubNets = new ArrayList<>();
 		for (Integer integer : valores) {
+			//pega o expoente da menor potencia de dois maior ou igual ao numero de endereços de subrede
+			//pois esse valor é o num de sufixo
+			//exemplo 64 tem expoente 6
 			int expoente = expoenteDaMenorPotenciaMaiorOuIgual(integer);
+			//gera as subnets a partir de l e com num de prefixo
+			//sufixo = 32 - prefixo
+			//no exemplo do 64, temos o prefixo /26, pois 32-6 = 26
+			//parseamos l que é um valor decimal do tipo long para binary string
+			//parseamos a binary string para decimal formatado em a.b.c.d
+			//criamos um ipv4 com a.b.c.d/ prefixo calculado
+			//adicionamos na lista generatedSubNets
 			generatedSubNets.add(new IPv4(binToDecFormated(Long.toBinaryString(l)), 32 - expoente));
+			//incrementamos l com o inteiro da lista, dessa forma na proxima execução do loop o endereço de subrede
+			//incial será o anterior + o numero de interfaces+2, ou seja o próximo endereço
+			//exemplo, 192.168.0.0 como long é 3232235520, se pedirmos algum numero entre 31 e 62 estamos requisitando
+			//um endereço que precisa de 64 endereços, ele vai usar o 3232235520 para converter em binary
+			//que converte em decimal formatado e usa o expoente de 64 que é 6 para criar o ipv4 192.168.0.0/26
+			//depois disso ele soma 3232235520 com 64 que gera 3232235584, que é o próxima sub rede criada
+			//que vai gerar um ipv4 192.168.0.64/alguma coisa dependendo da proxima requisição
+			//a lógica para não haver overflow das subredes geradas está no main
 			l += integer;
 		}
 		printSubNet(generatedSubNets);
@@ -235,10 +268,12 @@ public class IPv4 extends GenericByte {
 	public List<Integer> parseListaPotenciasOrdenadas(List<Integer> valores) {
 		List<Integer> list = new ArrayList<>();
 
+		//transforma todos valroes em potência de dois
 		for (Integer integer : valores) {
 			list.add(menorPotenciaMaiorOuIgual(integer));
 		}
 
+		//sort de collections e comparator para deixar ordenado de forma decrescente
 		Collections.sort(list, new Comparator<Integer>() {
 			@Override
 			public int compare(Integer arg0, Integer arg1) {
@@ -345,17 +380,24 @@ public class IPv4 extends GenericByte {
 	 *            número de sub-redes que queremos
 	 */
 	public void function(HashMap<String, Integer> mapa, int n) {
+		//enquanto o mapa não tem o n que você quer ele fica rodando recursivamente
 		if (mapa.size() < n) {
+			//cria um set com as chaves que são valores binários
 			Set<String> set = new HashSet<>(mapa.keySet());
 			for (String stringUm : set) {
+				//pra cada chave pega os valores que so o índice que pode ser trocado
 				Integer i = mapa.get(stringUm);
+				//gera um segundo valor binário trocando de 0 para 1 de acordo com o indice
 				String stringDois = "";
 				if (i == 0)
 					stringDois = "1" + stringUm.substring(1);
 				else
 					stringDois = stringUm.substring(0, i) + "1" + stringUm.substring(i + 1);
+				//coloca a string antiga com o índice + 1 e a nova com o índice + 1
 				mapa.put(stringUm, i + 1);
 				mapa.put(stringDois, i + 1);
+				//isso nunca será usado pois só precisamos quebrar em potências 2,
+				//porem essa função serve para divises não potências de 2
 				if (mapa.size() >= n)
 					break;
 			}
