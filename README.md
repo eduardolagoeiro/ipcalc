@@ -6,32 +6,32 @@ https://sites.google.com/site/diegogpassos/disciplinas/redesisi_2017_2/especific
 
 Instruções de compilação e uso.
 
-  Trabalho feito em Java (JDK1.8.0_121) utilizando IDE eclipse
+  >>Trabalho feito em Java (JDK1.8.0_121) utilizando IDE eclipse
   
-  Extrair zip e importar projeto em uma IDE e executar classe Main.java
+  >>Extrair zip e importar projeto em uma IDE e executar classe Main.java
   
-  ou
+  >ou
   
-  Executar jar que está dentro do zip
+  >>Executar jar que está dentro do zip
   
-  java -jar trabalho2redes.jar
+  >>java -jar trabalho2redes.jar
   
   
 Uma descrição geral dos módulos que compõem a implementação (e.g., classes, arquivos fonte).
 
-  Dcumento descritivo das classes de modelo (GenericByte e IPv4) está no javadoc em doc/index.html
+  >Documento descritivo das classes de modelo (GenericByte e IPv4) está no javadoc em doc/index.html
   
-  Comentários nas classes de modelo e main deixam bem claro como o programa funciona.
+  >Comentários nas classes de modelo e main deixam bem claro como o programa funciona.
 
 Grupo:
 
-  Caio Lima
+  >Caio Lima
   
-  Eduardo Lagoeiro
+  >Eduardo Lagoeiro
   
-  Gabriel Guedine
+  >Gabriel Guedine
   
-  Matheus Leal
+  >Matheus Leal
   
-  José Maurício
+  >José Maurício
   
