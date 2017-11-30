@@ -1,37 +1,43 @@
 # ipcalc
 ## Trabalho de Redes 2
 
-### Implementação do programa ipcalc segundo as instruções da disciplina de redes 2017/2 do curso de SI/UFF
+Implementação do programa ipcalc segundo as instruções da disciplina de redes 2017/2 do curso de SI/UFF
 https://sites.google.com/site/diegogpassos/disciplinas/redesisi_2017_2/especificacao-do-segundo-trabalho
+___
+* ## Relatório
+  * ### Instruções de compilação e uso.
 
->### Instruções de compilação e uso.
+    Trabalho feito em Java (JDK1.8.0_121) utilizando IDE eclipse
 
-  #### Trabalho feito em Java (JDK1.8.0_121) utilizando IDE eclipse
-  
-  ##### Extrair zip e importar projeto em uma IDE e executar classe Main.java
-  
-  ou
-  
-  ##### Executar jar que está dentro do zip
-  
-  ##### java -jar trabalho2redes.jar
-  
-  
->### Uma descrição geral dos módulos que compõem a implementação (e.g., classes, arquivos fonte).
+    * Extrair zip e importar projeto em uma IDE e executar classe **Main.java**
 
-  #### Documento descritivo das classes de modelo (GenericByte e IPv4) está no javadoc em doc/index.html
-  
-  #### Comentários nas classes de modelo e main deixam bem claro como o programa funciona.
+    ou
 
-## Grupo:
+    * Executar jar que está dentro do zip
 
-  #### Caio Lima
+
+    ```
+      java -jar trabalho2redes.jar
+    ```
   
-  #### Eduardo Lagoeiro
   
-  #### Gabriel Guedine
   
-  #### Matheus Leal
+  * ### Uma descrição geral dos módulos que compõem a implementação (e.g., classes, arquivos fonte).
+
+    Documento descritivo das classes de modelo (GenericByte e IPv4) está no javadoc em **doc/index.html**
+
+    Comentários nas classes de modelo e main deixam bem claro como o programa funciona.
   
-  #### José Maurício
+___
+* #### Grupo:
+
+  * Caio Lima
+  
+  * Eduardo Lagoeiro
+  
+  * Gabriel Guedine
+  
+  * Matheus Leal
+  
+  * José Maurício
   
