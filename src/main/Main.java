@@ -102,15 +102,16 @@ public class Main {
 		int entrada = -1;
 		int valor = 0;
 		do{
-			String string = scan.nextLine().trim();
+			System.out.println(string);
+			String stringLida = scan.nextLine().trim();
 			try{
-				entrada = Integer.valueOf(string);
+				entrada = Integer.valueOf(stringLida);
 			} catch (NumberFormatException e){
-				String[] subnetMask = string.split("\\.");
-				if(subnetMask.length != 4 && string.contains("."))
-					throw new IllegalArgumentException("Máscara de sub-rede "+string+" não é válida.");
-				else if(validaMask(string)){
-					GenericByte gb = new GenericByte(string);
+				String[] subnetMask = stringLida.split("\\.");
+				if(subnetMask.length != 4 && stringLida.contains("."))
+					throw new IllegalArgumentException("Máscara de sub-rede "+stringLida+" não é válida.");
+				else if(validaMask(stringLida)){
+					GenericByte gb = new GenericByte(stringLida);
 					String bin = gb.toBinary();
 					String sufix = bin.substring(bin.indexOf("0"));
 					valor = 32 - sufix.length();
