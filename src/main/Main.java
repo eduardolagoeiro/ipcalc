@@ -236,6 +236,8 @@ public class Main {
 		try{
 			String sufix = bin.substring(bin.indexOf("0"));
 			resp = !sufix.contains("1");
+			if(!resp)
+				throw new IllegalArgumentException("Máscara de sub-rede deve ser válida!");
 		}catch(StringIndexOutOfBoundsException e){
 			throw new IllegalArgumentException("Tamanho de prefixo de sub-rede deve ser entre 0 e 30");
 		}
